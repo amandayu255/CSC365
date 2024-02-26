@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Signup.css'; // Import your CSS file
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -23,24 +24,33 @@ const Signup = () => {
   };
 
   return (
-    <form onSubmit={handleSubmit}>
+    <div className="signup-container">
+      <h2>Sign Up</h2>
+      <form onSubmit={handleSubmit}>
+        <label>
+          Username:
+          <input type="text" value={username} onChange={handleUsernameChange} />
+        </label>
+        <br />
+        <label>
+          Email:
+          <input type="email" value={email} onChange={handleEmailChange} />
+        </label>
+        <br />
+        <label>
+          Password:
+          <input type="password" value={password} onChange={handlePasswordChange} />
+        </label>
+        <br />
+        <button type="submit">Sign Up</button>
+      </form>
+
       <label>
-        Username:
-        <input type="text" value={username} onChange={handleUsernameChange} />
+        <br />
+        Have an account? <a href="/login">Login</a>
       </label>
-      <br />
-      <label>
-        Email:
-        <input type="email" value={email} onChange={handleEmailChange} />
-      </label>
-      <br />
-      <label>
-        Password:
-        <input type="password" value={password} onChange={handlePasswordChange} />
-      </label>
-      <br />
-      <button type="submit">Sign Up</button>
-    </form>
+
+    </div>
   );
 };
 
