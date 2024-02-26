@@ -2,7 +2,7 @@
 
 To run the Recipe Database project:
 
-### 1. `Clone Repo into your IDE (preferably VSCODE`
+### 1. `Clone Repo into your IDE (preferably VSCODE)`
 
 [https://github.com/amandayu255/CSC365.git](https://github.com/amandayu255/CSC365.git)
 
@@ -12,7 +12,7 @@ Installs necessary node depencies.
 
 ### 3. Run `npm run dev`
 
-It'll should the app in the development mode.\
+It will show the app in the development mode.\
 Open [http://localhost:5173](http://localhost:5173) to view it in your browser.
 
 The page will reload when you make changes.
