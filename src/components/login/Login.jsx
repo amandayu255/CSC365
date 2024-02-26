@@ -1,45 +1,44 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import './Login.css';
 
 const Login = () => {
-  const [email, setEmail] = useState('');
+  const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
+
+  const handleUsernameChange = (e) => {
+    setUsername(e.target.value);
+  };
+
+  const handlePasswordChange = (e) => {
+    setPassword(e.target.value);
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Here you can add your login logic
-    console.log('Email:', email);
-    console.log('Password:', password);
-    // Example: Call an authentication API, etc.
+    // Add your login logic here
   };
 
   return (
-    <div className="login-page">
-      <h2>Login</h2>
+    <div className="login-container">
+      <h1>Login</h1>
       <form onSubmit={handleSubmit}>
-        <div className="form-group">
-          <label>Email:</label>
-          <input
-            type="email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label>Password:</label>
-          <input
-            type="password"
-            value={password}
-            onChange={(e) => setPassword(e.target.value)}
-            required
-          />
-        </div>
+        <label>
+          Username:
+          <input type="text" value={username} onChange={handleUsernameChange} />
+        </label>
+        <br />
+        <label>
+           Password:
+          <input type="password" value={password} onChange={handlePasswordChange} />
+        </label>
+        <br />
         <button type="submit">Login</button>
       </form>
-      <p>
-        Don't have an account? <Link to="/signup">Sign Up</Link>
-      </p>
+
+      <label>
+        <br />
+        Don't have an account? <a href="/signup">Sign Up</a>
+      </label>
     </div>
   );
 };
