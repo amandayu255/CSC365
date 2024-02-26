@@ -4,7 +4,7 @@ To run the Recipe Database project:
 
 ### 1. `Clone Repo into your IDE (preferably VSCODE`
 
-[https://github.com/anisharajuu/Ponte.git](https://github.com/amandayu255/CSC365.git)
+[https://github.com/amandayu255/CSC365.git](https://github.com/amandayu255/CSC365.git)
 
 ### 2. Run `npm install`
 
