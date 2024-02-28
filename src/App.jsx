@@ -30,6 +30,17 @@ function App() {
         <Route path="/cart" element={<Cart />} /> 
         <Route path="/payments" element={<Payments />} />
         <Route path="/profile" element={<Profile />} />
+
+        {/* occurs when user logs in, otherwise, cannot see pages below */}
+        
+        {/* 
+        <PrivateRoute path="/home" element={<Home />} />
+        <PrivateRoute path="/about" element={<About />} />
+        <PrivateRoute path="/storage" element={<Storage />} />
+        <PrivateRoute path="/grocery" element={<Grocery />} />
+        <PrivateRoute path="/cart" element={<Cart />} /> 
+        <PrivateRoute path="/payments" element={<Payments />} />
+        <PrivateRoute path="/profile" element={<Profile />} /> */}
         
       </Routes>
     </Router>
