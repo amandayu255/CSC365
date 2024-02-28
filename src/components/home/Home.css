@@ -27,5 +27,5 @@ main {
 }
 
 .search-and-filters > * {
-  margin-right: 10px; /* Adjust the margin between search bar and filter button */
+  margin-right: 100px; /* Adjust the margin between search bar and filter button */
 }

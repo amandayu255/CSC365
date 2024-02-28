@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import FiltersButton from "../FiltersButton";
-import SearchBar from "../SearchBar";
-import "./Home.css"; // Import your CSS file
+import FiltersButton from "../filter/FiltersButton";
+import SearchBar from "../search/SearchBar";
+import "./Home.css"; 
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
