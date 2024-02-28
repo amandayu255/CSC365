@@ -1,55 +1,47 @@
 .profile-container {
-    max-width: 400px;
-    margin: 0 auto;
-    padding: 20px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    /* background-color: #f9f9f9; */
-  }
-  
-  h1 {
-    text-align: center;
-  }
-  
-  form {
-    display: flex;
-    flex-direction: column;
-  }
-  
-  label {
-    margin-bottom: 10px;
-  }
-  
-  input[type="text"],
-  input[type="password"] {
-    width: 100%;
-    padding: 8px;
-    border: 1px solid #ccc;
-    border-radius: 5px;
-    box-sizing: border-box;
-    margin-bottom: 5px;
-  }
-  
-  button {
-    padding: 10px;
-    background-color: #007bff;
-    color: white;
-    border: 2px solid black;
-    border-radius: 5px;
-    cursor: pointer;
-    font-size: 16px;
-  }
-  
-  button:hover {
-    background-color: #007bff;
-  }
-  
-  a {
-    color: #007bff;
-    text-decoration: none;
-  }
-  
-  a:hover {
-    text-decoration: underline;
-  }
-  
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+.profile-info {
+  display: flex;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.profile-picture {
+  width: 150px;
+  height: 150px;
+  border-radius: 50%;
+  margin-right: 75px;
+}
+
+.profile-details {
+  flex: 1;
+}
+
+.profile-details h3 {
+  margin-top: 0;
+}
+
+.profile-details p {
+  margin: 10px 0;
+  text-align: left;
+}
+
+.profile-name {
+  font-size: 24px;
+  margin-bottom: 10px;
+}
+
+.profile-email,
+.profile-location {
+  font-size: 16px;
+  margin-bottom: 5px;
+}
+
+.profile-about {
+  font-size: 14px;
+  color: #666;
+}

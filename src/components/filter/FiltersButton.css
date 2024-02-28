@@ -1,0 +1,52 @@
+/* FilterDropdown.css */
+
+.filter-dropdown {
+  position: relative;
+  display: inline-block;
+}
+
+.dropdown-toggle {
+  padding: 8px 12px;
+  font-size: 16px;
+  background-color: black;
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.dropdown-toggle:hover {
+  padding: 8px 12px;
+  font-size: 16px;
+  background-color: #0096FF;
+  color: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  margin: 10px;
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  margin-top: 8px;
+  background-color: #fff;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  list-style-type: none;
+  padding: 0;
+  max-height: 200px;
+  overflow-y: auto;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.dropdown-menu li {
+  padding: 8px 12px;
+  cursor: pointer;
+}
+
+.dropdown-menu li:hover {
+  background-color: #f0f0f0;
+}
