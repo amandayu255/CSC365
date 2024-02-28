@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import './Signup.css'; // Import your CSS file
+import './Signup.css'; 
 
 const Signup = () => {
   const [username, setUsername] = useState('');
@@ -47,7 +47,7 @@ const Signup = () => {
 
       <label>
         <br />
-        Have an account? <a href="/login">Login</a>
+        Have an account? <a href="/">Login</a>
       </label>
 
     </div>
