@@ -3,19 +3,34 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Navbar from "./components/navbar/Navbar";
 import Home from "./components/home/Home";
-import About from "./components/about/About";
+import About from "./components/storage/Storage";
 import SignUp from "./components/signup/Signup";
 import Login from "./components/login/Login";
+import Storage from "./components/storage/Storage"
+import Grocery from "./components/grocery/Grocery"
+import Cart from "./components/cart/Cart"
+import Payments from "./components/payments/Payments";
+import Profile from "./components/profile/Profile"
 
 function App() {
   return (
     <Router>
+      
+      {/* remember to comment out navbar first; then make it appear when user logs in */}
       <Navbar />
+
       <Routes>
-        <Route exact path="/" element={<Home />} />
-        <Route path="/about" element={<About />} />
+        <Route exact path="/" element={<Login />} />
         <Route path="/signup" element={<SignUp />} />
-        <Route path="/login" element={<Login />} />
+
+        <Route path="/home" element={<Home />} />
+        <Route path="/about" element={<About />} />
+        <Route path="/storage" element={<Storage />} />
+        <Route path="/grocery" element={<Grocery />} />
+        <Route path="/cart" element={<Cart />} /> 
+        <Route path="/payments" element={<Payments />} />
+        <Route path="/profile" element={<Profile />} />
+        
       </Routes>
     </Router>
   );
