@@ -5,17 +5,29 @@ const Navbar = () => {
   return (
     <nav className="navbar">
       <ul className="navbar__links">
+        {/* Main landing page */}
         <li>
-          <a href="/">Home</a>
+          <a href="/home">Home</a>
         </li>
+        {/* Fridge/Pantry page */}
         <li>
-          <a href="/about">About</a>
+          <a href="/storage">Storage</a>
         </li>
+        {/* Grocery Store page */}
         <li>
-          <a href="/signup">Sign Up</a>
+          <a href="/grocery">Grocery Stores</a>
         </li>
+        {/* Shopping cart page */}
         <li>
-          <a href="/login">Login</a>
+          <a href="/cart">Shopping Cart</a>
+        </li>
+        {/* Payments page */}
+        <li>
+          <a href="/payments">Payments</a>
+        </li>
+        {/* User profile */}
+        <li>
+          <a href="/profile">Profile</a>
         </li>
       </ul>
     </nav>
