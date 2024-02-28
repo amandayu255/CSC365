@@ -18,7 +18,7 @@ const Home = () => {
   return (
     <div className="home-container">
       <header>
-        <h1>Fridge/Pantry</h1>
+        <h1>Recipes</h1>
       </header>
 
       <SearchBar onSearch={handleSearch} />
