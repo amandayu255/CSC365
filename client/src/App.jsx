@@ -7,10 +7,16 @@ import About from "./components/storage/Storage";
 import SignUp from "./components/signup/Signup";
 import Login from "./components/login/Login";
 import Storage from "./components/storage/Storage"
-import Grocery from "./components/grocery/Grocery"
-import Cart from "./components/cart/Cart"
-import Payments from "./components/payments/Payments";
+import GroceryStore from "./components/grocerystore/GroceryStore"
 import Profile from "./components/profile/Profile"
+import CookingHist from "./components/cookinghist/CookingHist";
+import ShoppingHist from "./components/shoppinghist/ShoppingHist"
+import Household from "./components/household/Household"
+import CreateHousehold from "./components/household/NewHousehold";
+import SpecificRecipe from "./components/home/SpecificRecipe";
+import CreateRecipe from "./components/home/CreateRecipe";
+import SpecificStore from "./components/grocerystore/SpecificStore";
+import SpecificOrder from "./components/shoppinghist/SpecificOrder";
 
 function App() {
   return (
@@ -26,10 +32,16 @@ function App() {
         <Route path="/home" element={<Home />} />
         <Route path="/about" element={<About />} />
         <Route path="/storage" element={<Storage />} />
-        <Route path="/grocery" element={<Grocery />} />
-        <Route path="/cart" element={<Cart />} /> 
-        <Route path="/payments" element={<Payments />} />
+        <Route path="/grocerystore" element={<GroceryStore />} />
+        <Route path="/specificstore" element={<SpecificStore />} /> 
         <Route path="/profile" element={<Profile />} />
+        <Route path="/shoppinghist" element={<ShoppingHist />} />
+        <Route path="/specificorder" element={<SpecificOrder />} />
+        <Route path="/cookinghist" element={<CookingHist />} />
+        <Route path="/household" element={<Household />} />
+        <Route path="/createhousehold" element={<CreateHousehold />} />
+        <Route path="/specificrecipe" element={<SpecificRecipe />} /> 
+        <Route path="/createrecipe" element={<CreateRecipe />} /> 
 
         {/* occurs when user logs in, otherwise, cannot see pages below */}
         
@@ -38,8 +50,6 @@ function App() {
         <PrivateRoute path="/about" element={<About />} />
         <PrivateRoute path="/storage" element={<Storage />} />
         <PrivateRoute path="/grocery" element={<Grocery />} />
-        <PrivateRoute path="/cart" element={<Cart />} /> 
-        <PrivateRoute path="/payments" element={<Payments />} />
         <PrivateRoute path="/profile" element={<Profile />} /> */}
         
       </Routes>
