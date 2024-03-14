@@ -15,15 +15,7 @@ const Navbar = () => {
         </li>
         {/* Grocery Store page */}
         <li>
-          <a href="/grocery">Grocery Stores</a>
-        </li>
-        {/* Shopping cart page */}
-        <li>
-          <a href="/cart">Shopping Cart</a>
-        </li>
-        {/* Payments page */}
-        <li>
-          <a href="/payments">Payments</a>
+          <a href="/grocerystore">Grocery Stores</a>
         </li>
         {/* User profile */}
         <li>
