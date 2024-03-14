@@ -1,5 +1,6 @@
 import express from "express"
 import mysql from "mysql"
+import cors from "cors"
 
 const app = express()
 
@@ -9,6 +10,9 @@ const db = mysql.createConnection({
     password: "idk", // video at 13:00
     database: "test"
 })
+
+app.use(express.json());
+app.use(cors());
 
 app.get("/", (req, res) => {
     res.json("hello this is the backend")
