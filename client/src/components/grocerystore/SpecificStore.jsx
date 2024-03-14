@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import axios from "axios";
 import SearchBar from "../search/SearchBar";
 import FiltersButton from "../filter/FiltersButton";
 // import "./SpecificStore.css";
@@ -6,6 +8,24 @@ import FiltersButton from "../filter/FiltersButton";
 const SpecificStore = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [products, setProducts] = useState([]);
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("storeid");
+
+  useEffect(() => {
+    const fetchSpecificStore = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:8800/SpecificStore/${id}`
+        );
+        setProducts(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchSpecificStore();
+    console.log("Specific store id:", products);
+  }, []);
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -40,8 +60,8 @@ const SpecificStore = () => {
           <tbody>
             {products.map((product, index) => (
               <tr key={index}>
-                <td>{product.name}</td>
-                <td>{product.type}</td>
+                <td>{product.product_name}</td>
+                <td>{product.product_type}</td>
                 <td>{product.price}</td>
               </tr>
             ))}

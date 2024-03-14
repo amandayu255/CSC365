@@ -50,7 +50,7 @@ const GroceryStore = () => {
           {groceries.map((grocery) => (
             <tr key={grocery.store_id}>
               <td>
-                <Link to={`/SpecificStore/${grocery.store_id}`}>
+                <Link to={`/SpecificStore/?storeid=${grocery.store_id}`}>
                   {grocery.store_id}
                 </Link>
               </td>
