@@ -1,0 +1,63 @@
+.create-household-container {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+}
+
+.create-household-container header h1 {
+  text-align: center;
+}
+
+.create-household-container main {
+  margin-top: 20px;
+}
+
+.create-household-container form {
+  display: flex;
+  flex-direction: column;
+}
+
+.create-household-container label {
+  margin-bottom: 10px;
+}
+
+.create-household-container input[type="text"] {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.create-household-container button[type="submit"] {
+  padding: 10px 20px;
+  margin-top: 10px;
+  background-color: #007bff;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.create-household-container button[type="submit"]:hover {
+  background-color: #0056b3;
+}
+
+.create-household-container div {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.create-household-container button {
+  padding: 8px 16px;
+  background-color: #28a745;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}
+
+.create-household-container button:hover {
+  background-color: #218838;
+}
