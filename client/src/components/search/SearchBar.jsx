@@ -21,21 +21,24 @@ const SearchBar = ({ onSearch }) => {
 
   return (
     <div>
-    <form className="search-bar-container" onSubmit={handleSubmit}>
-      <div className="search-input-container">
-        <input
-          className="search-input"
-          type="text"
-          placeholder="Search..."
-          value={query}
-          onChange={handleInputChange}
-        />
-        <div className="search-icon-container" onClick={handleSearchIconClick}>
-          <img src={searchIcon} alt="Search" className="search-icon" />
+      <form className="search-bar-container" onSubmit={handleSubmit}>
+        <div className="search-input-container">
+          <input
+            className="search-input"
+            type="text"
+            placeholder="Search..."
+            value={query}
+            onChange={handleInputChange}
+          />
+          <div
+            className="search-icon-container"
+            onClick={handleSearchIconClick}
+          >
+            <img src={searchIcon} alt="Search" className="search-icon" />
+          </div>
         </div>
-      </div>
-    </form>
-    <FiltersButton />
+      </form>
+      {/* <FiltersButton /> */}
     </div>
   );
 };
