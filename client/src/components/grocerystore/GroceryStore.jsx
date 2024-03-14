@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
 import SearchBar from "../search/SearchBar";
 import "./GroceryStore.css";
+import SpecificStore from "./SpecificStore";
 
 const GroceryStore = () => {
   const [searchQuery, setSearchQuery] = useState("");
@@ -33,6 +35,7 @@ const GroceryStore = () => {
 
       <SearchBar onSearch={handleSearch} />
       {/* <FiltersButton onClick={handleFiltersClick} /> */}
+      <Link to="/SpecificStore"><button>SpecificStore button test</button></Link>
 
       <Table stripped bordered hover size="sm">
         <thead>
