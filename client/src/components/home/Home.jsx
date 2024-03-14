@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
 import SearchBar from "../search/SearchBar";
+import SpecificRecipe from "./SpecificRecipe";
 import "./Home.css";
 
 const Home = () => {
@@ -35,8 +37,15 @@ const Home = () => {
         <h1>Recipes</h1>
       </header>
 
-      <SearchBar onSearch={handleSearch} />
-      {/* <FiltersButton onClick={handleFiltersClick} /> */}
+      <div className="searchbar-container">
+        <SearchBar onSearch={handleSearch} className="search-bar" />
+        <Link to="/CreateRecipe">
+          <button className="add-button">+</button>
+        </Link>
+        <Link to="/SpecificRecipe">
+          <button className="test">Link to Specific Recipe Test</button>
+        </Link>
+      </div>
 
       <main>
         <Table stripped bordered hover size="sm">
@@ -44,17 +53,18 @@ const Home = () => {
             <tr>
               <th width="600">Recipe ID</th>
               <th width="600">Name of Recipe</th>
-              <th width="600">Created By</th>
+              {/* <th width="600">Created By</th> */}
               <th width="600">Cuisine</th>
-              <th width="600">Can Cook</th>
-              <th width="600">Equipment</th>
+              <th width="600">Type</th>
+              {/* <th width="600">Can Cook</th> */}
               <th width="600">Time</th>
-              <th width="600">Nutrition Label</th>
+              {/* <th width="600">Nutrition Label</th> */}
             </tr>
           </thead>
           <tbody>
             {recipes.map((recipe) => (
               <tr key={recipe.id}>
+                <Link to="/Grocery"></Link>
                 <td>{recipe.name}</td>
                 <td>{recipe.created_by_user}</td>
                 <td>{recipe.cuisine}</td>
