@@ -66,12 +66,12 @@ const Home = () => {
               <tr key={recipe.id}>
                 <Link to="/Grocery"></Link>
                 <td>{recipe.name}</td>
-                <td>{recipe.created_by_user}</td>
+                {/* <td>{recipe.created_by_user}</td> */}
                 <td>{recipe.cuisine}</td>
-                <td>{recipe.can_cook}</td>
-                <td>{recipe.equipment}</td>
+                <td>{recipe.type}</td>
+                {/* <td>{recipe.can_cook}</td> */}
                 <td>{recipe.time}</td>
-                <td>{recipe.nutrition_label}</td>
+                {/* <td>{recipe.nutrition_label}</td> */}
               </tr>
             ))}
           </tbody>
