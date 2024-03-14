@@ -8,7 +8,7 @@ const db = mysql.createConnection({
     host: "localhost",
     user: "root",
     password: "idk", // video at 13:00
-    database: "test"
+    database: "recipe"
 })
 
 app.use(express.json());
@@ -19,8 +19,8 @@ app.get("/", (req, res) => {
 })
 
 // table name 
-app.get("/recipes", (req, res) => {
-    const q = "SELECT * FROM recipes"
+app.get("/Recipe", (req, res) => {
+    const q = "SELECT * FROM Recipe"
     db.query(q, (err, data) => {
         if (err) return res.json(err)
         return res.json(data)
