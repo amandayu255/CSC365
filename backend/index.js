@@ -100,13 +100,15 @@ app.get("/Recipe", (req, res) => {
 });
 
 app.post("/Recipe", (req, res) => {
-  const q = "INSERT INTO Recipe (recipe_id, name, created_by_user, cuisine, time_minutes) VALUES (?)"
+    console.log("Request body:", req.body);
+    console.log(req.body.userID)
+  const q = "INSERT INTO Recipe (`recipe_id`, `name`, `created_by_user`, `cuisine`, `time_minutes`) VALUES (?)"
   const values = [
     req.body.recipe_id,
     req.body.name,
-    req.body.created_by_user,
+    req.body.userID,
     req.body.cuisine,
-    req.body.time_minutes,
+    req.body.cookTime,
   ];
 
   db.query(q, [values], (err, data) => {

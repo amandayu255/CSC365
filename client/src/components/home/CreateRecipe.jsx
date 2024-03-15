@@ -4,7 +4,7 @@ import "./CreateRecipe.css";
 
 const CreateRecipe = () => {
   const [name, setName] = useState("");
-  const [userID, setUserID] = useState("");
+  const [userID, setUserID] = useState("1");
   const [cuisine, setCuisine] = useState("");
   const [cookTime, setCookTime] = useState("");
   const [ingredientList, setIngredientList] = useState([]);
