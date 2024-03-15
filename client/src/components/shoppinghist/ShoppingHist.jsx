@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from "react";
 import axios from "axios";
-import { Link } from "react-router-dom";
 import Table from "react-bootstrap/Table";
-import SpecificOrder from "./SpecificOrder";
+import { format } from "date-fns";
 
 const ShoppingHist = () => {
   const [shoppinghist, setShoppingHist] = useState([]);
@@ -10,12 +9,20 @@ const ShoppingHist = () => {
   useEffect(() => {
     const fetchShoppingHist = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/shoppinghist");
-        setShoppingHist(res.data);
+        const res = await axios.get("http://localhost:8800/ShoppingHist");
+
+        const formattedData = res.data.map(item => ({
+          ...item,
+          purchase_date: format(new Date(item.purchase_date), "yyyy-MM-dd") // Format date
+        }));
+
+        setShoppingHist(formattedData); 
       } catch (error) {
-        console.log(err);
+        console.log(error);
       }
     };
+
+    fetchShoppingHist();
   }, []);
 
   return (
@@ -23,9 +30,6 @@ const ShoppingHist = () => {
       <header>
         <h1>Shopping History</h1>
       </header>
-      <Link to="/SpecificOrder">
-        <button>Specific Order test button</button>
-      </Link>
 
       <Table stripped bordered hover size="sm">
         <thead>
@@ -42,11 +46,12 @@ const ShoppingHist = () => {
         <tbody>
           {shoppinghist.map((shoppinghis) => (
             <tr key={shoppinghis.order_id}>
+              <td>{shoppinghis.order_id}</td>
               <td>{shoppinghis.store_id}</td>
               <td>{shoppinghis.bought_by_user}</td>
               <td>{shoppinghis.product}</td>
               <td>{shoppinghis.price}</td>
-              <td>{shoppinghis.date}</td>
+              <td>{shoppinghis.purchase_date}</td>
             </tr>
           ))}
         </tbody>

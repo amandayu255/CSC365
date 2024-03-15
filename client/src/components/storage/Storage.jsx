@@ -1,15 +1,34 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import axios from "axios";
 import Table from "react-bootstrap/Table";
 import SearchBar from "../search/SearchBar";
-import "./Storage.css";
+import { format } from "date-fns"; 
 
 const Storage = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [groceries, setGroceries] = useState([]);
 
   const handleSearch = (query) => {
     setSearchQuery(query);
     console.log("Search query:", query);
   };
+
+  useEffect(() => {
+    const fetchGroceries = async () => {
+      try {
+        const res = await axios.get("http://localhost:8800/Grocery");
+        const formattedData = res.data.map((item) => ({
+          ...item,
+          exp_date: format(new Date(item.exp_date), "yyyy-MM-dd"),
+        }));
+        setGroceries(formattedData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchGroceries();
+  }, []);
 
   return (
     <div className="home-container">
@@ -20,29 +39,31 @@ const Storage = () => {
       <SearchBar onSearch={handleSearch} />
 
       <main>
-        <Table stripped bordered hover size="sm">
+        <Table striped bordered hover size="sm">
           <thead>
             <tr>
-              <th width="427">Name</th>
-              <th width="427">Duration</th>
-              <th width="427">Buy Date</th>
-              <th width="427">Expiration Date</th>
+              <th width="200">House ID</th>
+              <th width="200px">Order ID</th>
+              <th width="1000px">Ingredient</th>
+              <th width="200px">Storage</th>
+              <th width="200px">Available</th>
+              <th width="200px">Quantity</th>
+              <th width="400px">Expiration Date</th>
             </tr>
           </thead>
-          <tbody>
-            <tr>
-              <td>Ice cream</td>
-              <td>11</td>
-              <td>Annie</td>
-              <td>Poppy</td>
-            </tr>
 
-            <tr>
-              <td>Ice cream</td>
-              <td>11</td>
-              <td>Annie</td>
-              <td>Poppy</td>
-            </tr>
+          <tbody>
+            {groceries.map((grocery) => (
+              <tr key={grocery.house_id}>
+                <td>{grocery.house_id}</td>
+                <td>{grocery.order_id}</td>
+                <td>{grocery.ingredient}</td>
+                <td>{grocery.storage}</td>
+                <td>{grocery.available}</td>
+                <td>{grocery.quantity}</td>
+                <td>{grocery.exp_date}</td>
+              </tr>
+            ))}
           </tbody>
         </Table>
       </main>

@@ -1,20 +1,32 @@
 import React, { useState } from "react";
+import axios from "axios"; // Add this import
 import "./CreateRecipe.css";
 
 const CreateRecipe = () => {
   const [name, setName] = useState("");
   const [cookTime, setCookTime] = useState("");
   const [ingredientList, setIngredientList] = useState([]);
+  const [ingredientGramsList, setIngredientGramsList] = useState([]);
   const [instructionList, setInstructionList] = useState([]);
 
   const handleAddIngredient = () => {
-    setIngredientList([...ingredientList, ""]);
+    setIngredientList([
+      ...ingredientList,
+      { name: "", quantity: "", unit: "", grams: "" },
+    ]);
+    setIngredientGramsList([...ingredientGramsList, ""]);
   };
 
   const handleIngredientChange = (index, value) => {
     const newList = [...ingredientList];
     newList[index] = value;
     setIngredientList(newList);
+  };
+
+  const handleIngredientGramsChange = (index, value) => {
+    const newList = [...ingredientGramsList];
+    newList[index] = value;
+    setIngredientGramsList(newList);
   };
 
   const handleAddInstruction = () => {
@@ -27,14 +39,25 @@ const CreateRecipe = () => {
     setInstructionList(newList);
   };
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    console.log("Form submitted:", {
-      name,
-      cookTime,
-      ingredientList,
-      instructionList,
-    });
+    try {
+      const res = await axios.post("http://localhost:8800/Recipe", {
+        name,
+        cookTime,
+        ingredientList,
+        ingredientGramsList,
+        instructionList,
+      });
+      console.log("Recipe created successfully:", res.data);
+      setName("");
+      setCookTime("");
+      setIngredientList([]);
+      setIngredientGramsList([]);
+      setInstructionList([]);
+    } catch (error) {
+      console.error("Error creating recipe:", error);
+    }
   };
 
   return (
@@ -60,20 +83,70 @@ const CreateRecipe = () => {
               onChange={(e) => setCookTime(e.target.value)}
             />
           </label>
+
           <div className="ingredients-section">
             <h2>Ingredients</h2>
             {ingredientList.map((ingredient, index) => (
-              <input
-                key={index}
-                type="text"
-                value={ingredient}
-                onChange={(e) => handleIngredientChange(index, e.target.value)}
-              />
+              <div className="ingredient-input-group" key={index}>
+                <input
+                  className="ingredient-input"
+                  type="text"
+                  value={ingredient.name}
+                  onChange={(e) =>
+                    handleIngredientChange(index, {
+                      ...ingredient,
+                      name: e.target.value,
+                    })
+                  }
+                  placeholder="Ingredient"
+                />
+                <input
+                  className="quantity-input"
+                  type="text"
+                  value={ingredient.quantity}
+                  onChange={(e) =>
+                    handleIngredientChange(index, {
+                      ...ingredient,
+                      quantity: e.target.value,
+                    })
+                  }
+                  placeholder="Quantity"
+                />
+                <select
+                  className="unit-dropdown"
+                  value={ingredient.unit}
+                  onChange={(e) =>
+                    handleIngredientChange(index, {
+                      ...ingredient,
+                      unit: e.target.value,
+                    })
+                  }
+                >
+                  <option value="">Select Unit</option>
+                  <option value="tsp">tsp</option>
+                  <option value="tbsp">tbsp</option>
+                  <option value="g">g</option>
+                  <option value="oz">oz</option>
+                </select>
+                <input
+                  className="grams-input"
+                  type="text"
+                  value={ingredient.grams}
+                  onChange={(e) =>
+                    handleIngredientChange(index, {
+                      ...ingredient,
+                      grams: e.target.value,
+                    })
+                  }
+                  placeholder="Grams"
+                />
+              </div>
             ))}
             <button type="button" onClick={handleAddIngredient}>
               Add Ingredient
             </button>
           </div>
+
           <div className="instructions-section">
             <h2>Instructions</h2>
             <ol>

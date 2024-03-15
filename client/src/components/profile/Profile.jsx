@@ -22,9 +22,9 @@ const Profile = () => {
         <p className="profile-email">
           <strong>Email:</strong> john.doe@example.com
         </p>
-        <p className="favorite-recipe">
+        {/* <p className="favorite-recipe">
           <strong>Favorite Recipe:</strong> Fried rice
-        </p>
+        </p> */}
         <br></br>
         <div className="buttons-container">
           <Link to="/ShoppingHist">

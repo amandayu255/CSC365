@@ -8,28 +8,26 @@ import "./Home.css";
 
 const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
-
-  const handleSearch = (query) => {
-    setSearchQuery(query);
-    console.log("Search query:", query);
-  };
-
   const [recipes, setRecipes] = useState([]);
 
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/recipes");
+        const res = await axios.get("http://localhost:8800/Recipe");
+        console.log("Response from backend:", res.data); // Log the response
         setRecipes(res.data);
       } catch (error) {
-        console.log(err);
+        console.error("Error fetching recipes:", error);
       }
     };
+
+    fetchRecipes();
   }, []);
 
-  // const handleFiltersClick = () => {
-  //   console.log("Filters button clicked");
-  // };
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    console.log("Search query:", query);
+  };
 
   return (
     <div className="home-container">
@@ -42,36 +40,34 @@ const Home = () => {
         <Link to="/CreateRecipe">
           <button className="add-button">+</button>
         </Link>
-        <Link to="/SpecificRecipe">
+        {/* <Link to="/SpecificRecipe">
           <button className="test">Link to Specific Recipe Test</button>
-        </Link>
+        </Link> */}
       </div>
 
       <main>
         <Table stripped bordered hover size="sm">
           <thead>
             <tr>
-              <th width="600">Recipe ID</th>
-              <th width="600">Name of Recipe</th>
-              {/* <th width="600">Created By</th> */}
-              <th width="600">Cuisine</th>
-              <th width="600">Type</th>
-              {/* <th width="600">Can Cook</th> */}
-              <th width="600">Time</th>
-              {/* <th width="600">Nutrition Label</th> */}
+              <th width="100">Recipe ID</th>
+              <th width="200">Name of Recipe</th>
+              <th width="150">Created By User</th>
+              <th width="150">Cuisine</th>
+              <th width="150">Time (minutes)</th>
             </tr>
           </thead>
           <tbody>
             {recipes.map((recipe) => (
-              <tr key={recipe.id}>
-                <Link to="/Grocery"></Link>
+              <tr key={recipe.recipe_id}>
+                <td>
+                  <Link to={`/SpecificRecipe/${recipe.recipe_id}`}>
+                    {recipe.recipe_id}
+                  </Link>
+                </td>
                 <td>{recipe.name}</td>
-                {/* <td>{recipe.created_by_user}</td> */}
+                <td>{recipe.created_by_user}</td>
                 <td>{recipe.cuisine}</td>
-                <td>{recipe.type}</td>
-                {/* <td>{recipe.can_cook}</td> */}
-                <td>{recipe.time}</td>
-                {/* <td>{recipe.nutrition_label}</td> */}
+                <td>{recipe.time_minutes}</td>
               </tr>
             ))}
           </tbody>

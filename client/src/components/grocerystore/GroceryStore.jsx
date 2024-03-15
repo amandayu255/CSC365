@@ -3,28 +3,27 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import Table from "react-bootstrap/Table";
 import SearchBar from "../search/SearchBar";
-import "./GroceryStore.css";
-import SpecificStore from "./SpecificStore";
 
 const GroceryStore = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [groceries, setGroceries] = useState([]);
 
   const handleSearch = (query) => {
     setSearchQuery(query);
     console.log("Search query:", query);
   };
 
-  const [groceries, setGroceries] = useState([]);
-
   useEffect(() => {
     const fetchGroceries = async () => {
       try {
-        const res = await axios.get("http://localhost:8800/grocery");
+        const res = await axios.get("http://localhost:8800/GroceryStore");
         setGroceries(res.data);
       } catch (error) {
-        console.log(err);
+        console.log(error);
       }
     };
+
+    fetchGroceries();
   }, []);
 
   return (
@@ -34,8 +33,6 @@ const GroceryStore = () => {
       </header>
 
       <SearchBar onSearch={handleSearch} />
-      {/* <FiltersButton onClick={handleFiltersClick} /> */}
-      <Link to="/SpecificStore"><button>SpecificStore button test</button></Link>
 
       <Table stripped bordered hover size="sm">
         <thead>
@@ -51,7 +48,12 @@ const GroceryStore = () => {
 
         <tbody>
           {groceries.map((grocery) => (
-            <tr key={grocery.id}>
+            <tr key={grocery.store_id}>
+              <td>
+                <Link to={`/SpecificStore/${grocery.store_id}`}>
+                  {grocery.store_id}
+                </Link>
+              </td>
               <td>{grocery.name}</td>
               <td>{grocery.street_address}</td>
               <td>{grocery.city}</td>

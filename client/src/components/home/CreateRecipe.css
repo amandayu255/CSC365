@@ -57,3 +57,19 @@
 .create-recipe-container button[type="submit"]:hover {
   background-color: #0056b3;
 }
+
+.ingredient-input-group {
+  display: flex;
+  align-items: center;
+}
+
+.ingredient-input,
+.quantity-input,
+.unit-dropdown,
+.grams-input {
+  margin-right: 5px;
+}
+
+.grams-input {
+  width: 80px; /* Adjust width as needed */
+}
