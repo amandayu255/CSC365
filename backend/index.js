@@ -78,13 +78,50 @@ app.get("/Recipe", (req, res) => {
 
 app.get("/SpecificRecipe/:recipeid", (req, res) => {
     console.log("Specific recipe id:", req.params.recipeid);
+    const p = `SELECT * FROM Recipe WHERE recipe_id = ${req.params.recipeid}`;
     const q = `SELECT * FROM RecipeIngred WHERE recipe_id = ${req.params.recipeid}`;
-    db.query(q, (err, data) => {
-        if (err) return res.json(err);
-        console.log("Data:", data);
-        return res.json(data);
+    const r = `SELECT * FROM Instructions WHERE recipe_id = ${req.params.recipeid}`;
+    const s = `SELECT * FROM NutritionLabel WHERE recipe_id = ${req.params.recipeid}`;
+
+    db.query(p, (err, recipeData) => {
+        if (err) {
+            console.error("Error fetching recipe:", err);
+            return res.status(500).json({ error: "Error fetching recipe" });
+        }
+
+        db.query(q, (err, ingredientData) => {
+            if (err) {
+                console.error("Error fetching ingredients:", err);
+                return res.status(500).json({ error: "Error fetching ingredients" });
+            }
+
+            db.query(r, (err, instructionData) => {
+                if (err) {
+                    console.error("Error fetching instructions:", err);
+                    return res.status(500).json({ error: "Error fetching instructions" });
+                }
+
+                db.query(s, (err, nutritionLabelData) => {
+                    if (err) {
+                        console.error("Error fetching nutrition labels:", err);
+                        return res.status(500).json({ error: "Error fetching nutrition labels" });
+                    }
+
+                    const responseData = {
+                        recipe: recipeData[0],
+                        ingredients: ingredientData,
+                        instructions: instructionData,
+                        nutritionLabels: nutritionLabelData
+                    };
+
+                    console.log("Data:", responseData);
+                    return res.json(responseData);
+                });
+            });
+        });
     });
 });
+
 
 app.get("/Instructions", (req, res) => {
     const q = "SELECT * FROM Instructions";
