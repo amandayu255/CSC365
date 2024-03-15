@@ -60,7 +60,7 @@ const Home = () => {
             {recipes.map((recipe) => (
               <tr key={recipe.recipe_id}>
                 <td>
-                  <Link to={`/SpecificRecipe/${recipe.recipe_id}`}>
+                  <Link to={`/SpecificRecipe/?recipe_id=${recipe.recipe_id}`}>
                     {recipe.recipe_id}
                   </Link>
                 </td>

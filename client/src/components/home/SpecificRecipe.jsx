@@ -8,7 +8,7 @@ const SpecificRecipe = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [ingredients, setIngredients] = useState([]);
   const [searchParams] = useSearchParams();
-  const id = searchParams.get("recipeid");
+  const id = searchParams.get("recipe_id");
 
   useEffect(() => {
     const fetchSpecificRecipe = async () => {
@@ -23,7 +23,7 @@ const SpecificRecipe = () => {
     };
 
     fetchSpecificRecipe();
-    console.log("Specific recipe id:", ingredients);
+    console.log("Specific recipe id:", id);
   }, []);
 
   const handleSearch = (query) => {
