@@ -1,21 +1,25 @@
-import React, { useState } from 'react';
-import './Login.css';
+import React, { useState } from "react";
+import axios from "axios";
+import "./Login.css";
 
 const Login = () => {
-  const [username, setUsername] = useState('');
-  const [password, setPassword] = useState('');
-
-  const handleUsernameChange = (e) => {
-    setUsername(e.target.value);
-  };
-
-  const handlePasswordChange = (e) => {
-    setPassword(e.target.value);
+  const [user, setUser] = useState({ email: "", password: "" });
+  const handleUserChange = (e) => {
+    setUser({ ...user, [e.target.id]: e.target.value });
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Add your login logic here
+    axios
+      .post("http://localhost:8800/login", {
+        email: user.email,
+        password: user.password,
+      })
+      .then((res) => {
+        if (res.data) {
+          window.location.href = "/home";
+        }
+      });
   };
 
   return (
@@ -23,16 +27,28 @@ const Login = () => {
       <h1>Login</h1>
       <form onSubmit={handleSubmit}>
         <label>
-          Username:
-          <input type="text" value={username} onChange={handleUsernameChange} />
+          Email:
+          <input
+            id="email"
+            type="text"
+            value={user.email}
+            onChange={handleUserChange}
+          />
         </label>
         <br />
         <label>
-           Password:
-          <input type="password" value={password} onChange={handlePasswordChange} />
+          Password:
+          <input
+            id="password"
+            type="password"
+            value={user.password}
+            onChange={handleUserChange}
+          />
         </label>
         <br />
-        <button type="submit">Login</button>
+        <button type="submit" onClick={handleSubmit}>
+          Login
+        </button>
       </form>
 
       <label>

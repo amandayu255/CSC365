@@ -4,6 +4,7 @@ import "./CreateRecipe.css";
 
 const CreateRecipe = () => {
   const [name, setName] = useState("");
+  const [cuisine, setCuisine] = useState("");
   const [cookTime, setCookTime] = useState("");
   const [ingredientList, setIngredientList] = useState([]);
   const [ingredientGramsList, setIngredientGramsList] = useState([]);
@@ -44,6 +45,7 @@ const CreateRecipe = () => {
     try {
       const res = await axios.post("http://localhost:8800/Recipe", {
         name,
+        cuisine,
         cookTime,
         ingredientList,
         ingredientGramsList,
@@ -51,6 +53,7 @@ const CreateRecipe = () => {
       });
       console.log("Recipe created successfully:", res.data);
       setName("");
+      setCuisine("");
       setCookTime("");
       setIngredientList([]);
       setIngredientGramsList([]);
@@ -73,6 +76,14 @@ const CreateRecipe = () => {
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
+            />
+          </label>
+          <label>
+            Cuisine:
+            <input
+              type="text"
+              value={cuisine}
+              onChange={(e) => setCuisine(e.target.value)}
             />
           </label>
           <label>
@@ -125,8 +136,10 @@ const CreateRecipe = () => {
                   <option value="">Select Unit</option>
                   <option value="tsp">tsp</option>
                   <option value="tbsp">tbsp</option>
+                  <option value="cup">cup</option>
                   <option value="g">g</option>
                   <option value="oz">oz</option>
+                  <option value="count">count</option>
                 </select>
                 <input
                   className="grams-input"
@@ -138,7 +151,7 @@ const CreateRecipe = () => {
                       grams: e.target.value,
                     })
                   }
-                  placeholder="Grams"
+                  placeholder="Estimated Grams"
                 />
               </div>
             ))}
