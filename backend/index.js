@@ -66,6 +66,21 @@ app.get("/Recipe", (req, res) => {
     })
 })
 
+app.get("/Recipe/:recipeId", (req, res) => {
+    const recipeId = req.params.recipeId;
+    const query = `SELECT * FROM Recipe WHERE recipe_id = ?`;
+    db.query(query, [recipeId], (err, data) => {
+        if (err) {
+            console.error("Error fetching recipe:", err);
+            return res.status(500).json({ error: "Internal server error" });
+        }
+        if (data.length === 0) {
+            return res.status(404).json({ error: "Recipe not found" });
+        }
+        res.json(data[0]);
+    });
+});
+
 app.get("/Instructions", (req, res) => {
     const q = "SELECT * FROM Instructions"
     db.query(q, (err, data) => {
