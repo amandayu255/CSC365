@@ -4,6 +4,7 @@ import "./CreateRecipe.css";
 
 const CreateRecipe = () => {
   const [name, setName] = useState("");
+  const [userID, setUserID] = useState("");
   const [cuisine, setCuisine] = useState("");
   const [cookTime, setCookTime] = useState("");
   const [ingredientList, setIngredientList] = useState([]);
@@ -42,17 +43,21 @@ const CreateRecipe = () => {
 
   const handleSubmit = async (event) => {
     event.preventDefault();
+    console.log("Submitting form data:", { name, cuisine, cookTime, ingredientList, ingredientGramsList, instructionList });
     try {
       const res = await axios.post("http://localhost:8800/Recipe", {
         name,
         cuisine,
         cookTime,
+        userID, 
         ingredientList,
         ingredientGramsList,
         instructionList,
       });
+      console.log("Response from backend:", res.data);
       console.log("Recipe created successfully:", res.data);
       setName("");
+      setUserID(1); // Reset userID to 1
       setCuisine("");
       setCookTime("");
       setIngredientList([]);

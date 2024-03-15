@@ -10,17 +10,17 @@ const Home = () => {
   const [searchQuery, setSearchQuery] = useState("");
   const [recipes, setRecipes] = useState([]);
 
-  useEffect(() => {
-    const fetchRecipes = async () => {
-      try {
-        const res = await axios.get("http://localhost:8800/Recipe");
-        console.log("Response from backend:", res.data); // Log the response
-        setRecipes(res.data);
-      } catch (error) {
-        console.error("Error fetching recipes:", error);
-      }
-    };
+  const fetchRecipes = async () => {
+    try {
+      const res = await axios.get("http://localhost:8800/Recipe");
+      console.log("Response from backend:", res.data);
+      setRecipes(res.data);
+    } catch (error) {
+      console.error("Error fetching recipes:", error);
+    }
+  };
 
+  useEffect(() => {
     fetchRecipes();
   }, []);
 

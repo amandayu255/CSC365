@@ -26,18 +26,18 @@ app.post("/login", (req, res) => {
   db.query(
     `SELECT * FROM User WHERE email = '${email}' AND password = '${password}'`,
     (err, result) => {
-			if (err) {
-				res.send({ err: err });
-			}
+      if (err) {
+        res.send({ err: err });
+      }
 
-			if (result.length > 0) {
-				if (result[0].password === password && result[0].email === email) {
-					res.send(true)
-				} else {
-					res.send(false)
-				}
-			}
-		}
+      if (result.length > 0) {
+        if (result[0].password === password && result[0].email === email) {
+          res.send(true)
+        } else {
+          res.send(false)
+        }
+      }
+    }
   );
 });
 
@@ -97,6 +97,22 @@ app.get("/Recipe", (req, res) => {
     if (err) return res.json(err);
     return res.json(data);
   });
+});
+
+app.post("/Recipe", (req, res) => {
+  const q = "INSERT INTO Recipe (recipe_id, name, created_by_user, cuisine, time_minutes) VALUES (?)"
+  const values = [
+    req.body.recipe_id,
+    req.body.name,
+    req.body.created_by_user,
+    req.body.cuisine,
+    req.body.time_minutes,
+  ];
+
+  db.query(q, [values], (err, data) => {
+    if (err) return res.json(err);
+    return res.json(data);
+  })
 });
 
 app.get("/SpecificRecipe/:recipeid", (req, res) => {
