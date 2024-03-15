@@ -1,43 +1,72 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useSearchParams } from "react-router-dom";
+import axios from "axios";
+import SearchBar from "../search/SearchBar";
+import FiltersButton from "../filter/FiltersButton";
 
 const SpecificRecipe = () => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const [ingredients, setIngredients] = useState([]);
+  const [searchParams] = useSearchParams();
+  const id = searchParams.get("recipeid");
+
+  useEffect(() => {
+    const fetchSpecificRecipe = async () => {
+      try {
+        const res = await axios.get(
+          `http://localhost:8800/SpecificRecipe/${id}`
+        );
+        setIngredients(res.data);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchSpecificRecipe();
+    console.log("Specific recipe id:", ingredients);
+  }, []);
+
+  const handleSearch = (query) => {
+    setSearchQuery(query);
+    console.log("Search query:", query);
+    // Perform search logic here and update ingredients state
+  };
+
+  const handleButtonClick = () => {
+    // Handle button click logic here
+    console.log("Button clicked");
+  };
+
   return (
     <div className="specific-recipe-container">
       <header>
-        {/* <h1>Specific Recipe</h1> */}
-        <h1>Name of Recipe:</h1>
+        <h1>Recipe Name</h1>
+        <p>Cuisine: </p>
+        <p>Preparation Time: </p>
       </header>
       <main>
-        <section className="ingredients-section">
-          <h2>Ingredients</h2>
-          <ul>
-            <li>Ingredient 1</li>
-            <li>Ingredient 2</li>
-            <li>Ingredient 3</li>
-          </ul>
-        </section>
-        <section className="cooking-time-section">
-          <h2>Cooking Time</h2>
-          <p>30 minutes</p>
-        </section>
-        <section className="instructions-section">
-          <h2>Instructions</h2>
-          <ol>
-            <li>Step 1: Instruction 1</li>
-            <li>Step 2: Instruction 2</li>
-            <li>Step 3: Instruction 3</li>
-          </ol>
-        </section>
-        <section className="nutrition-section">
-          <h2>Nutrition Label:</h2>
-          <ul>
-            <li>Calories: 300</li>
-            <li>Sugar: 10g</li>
-            <li>Cholesterol:</li>
-            <li>Sodium: 10g</li>
-            <li>Serving size:</li>
-          </ul>
-        </section>
+        <div className="search-bar-container">
+          <SearchBar />
+          <button onClick={handleButtonClick}>Filter</button>
+        </div>
+        <table>
+          <thead>
+            <tr>
+              <th>Ingredient</th>
+              <th>Quantity</th>
+              <th>Unit</th>
+            </tr>
+          </thead>
+          <tbody>
+            {ingredients.map((ingredient, index) => (
+              <tr key={index}>
+                <td>{ingredient.ingredient}</td>
+                <td>{ingredient.quantity}</td>
+                <td>{ingredient.unit}</td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
       </main>
     </div>
   );
