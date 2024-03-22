@@ -2,11 +2,10 @@ import React, { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import SearchBar from "../search/SearchBar";
-import FiltersButton from "../filter/FiltersButton";
-// import "./SpecificStore.css";
 
 const SpecificStore = () => {
   const [searchQuery, setSearchQuery] = useState("");
+  const [storeInfo, setStoreInfo] = useState({});
   const [products, setProducts] = useState([]);
   const [searchParams] = useSearchParams();
   const id = searchParams.get("storeid");
@@ -17,15 +16,15 @@ const SpecificStore = () => {
         const res = await axios.get(
           `http://localhost:8800/SpecificStore/${id}`
         );
-        setProducts(res.data);
+        setStoreInfo(res.data.storeInfo);
+        setProducts(res.data.products);
       } catch (error) {
         console.log(error);
       }
     };
 
     fetchSpecificStore();
-    console.log("Specific store id:", products);
-  }, []);
+  }, [id]);
 
   const handleSearch = (query) => {
     setSearchQuery(query);
@@ -41,8 +40,12 @@ const SpecificStore = () => {
   return (
     <div className="specific-store-container">
       <header>
-        <h1>Grocery Store Name</h1>
-        <p>Address: </p>
+        <h1>{storeInfo.name}</h1>
+        <p>
+          <strong>Address: </strong>
+          {storeInfo.street_address}, {storeInfo.city}, {storeInfo.state},{" "}
+          {storeInfo.zip_code}
+        </p>
       </header>
       <main>
         <div className="search-bar-container">

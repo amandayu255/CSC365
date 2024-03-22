@@ -57,15 +57,45 @@ app.get("/GroceryStore", (req, res) => {
   });
 });
 
+// app.get("/SpecificStore/:storeid", (req, res) => {
+//   console.log("Specific store id:", req.params.storeid);
+//   const q = `SELECT * FROM Products WHERE store_id = ${req.params.storeid}`;
+//   db.query(q, (err, data) => {
+//     if (err) return res.json(err);
+//     console.log("Data:", data);
+//     return res.json(data);
+//   });
+// });
+
 app.get("/SpecificStore/:storeid", (req, res) => {
-  console.log("Specific store id:", req.params.storeid);
-  const q = `SELECT * FROM Products WHERE store_id = ${req.params.storeid}`;
-  db.query(q, (err, data) => {
-    if (err) return res.json(err);
-    console.log("Data:", data);
-    return res.json(data);
+  // console.log("Specific store id:", req.params.storeid);
+
+  const storeQuery = `SELECT name, street_address, city, state, zip_code FROM GroceryStore WHERE store_id = ${req.params.storeid}`;
+  const productQuery = `SELECT * FROM Products WHERE store_id = ${req.params.storeid}`;
+
+  db.query(storeQuery, (err, storeData) => {
+    if (err) {
+      console.error("Error fetching store data:", err);
+      return res.status(500).json({ error: "Error fetching store data" });
+    }
+
+    db.query(productQuery, (err, productData) => {
+      if (err) {
+        console.error("Error fetching products:", err);
+        return res.status(500).json({ error: "Error fetching products" });
+      }
+
+      const responseData = {
+        storeInfo: storeData[0], // Assuming only one store info is returned
+        products: productData,
+      };
+
+      console.log("Data:", responseData);
+      return res.json(responseData);
+    });
   });
 });
+
 
 app.get("/Products", (req, res) => {
   const q = "SELECT * FROM Products";
@@ -100,8 +130,8 @@ app.get("/Recipe", (req, res) => {
 });
 
 app.post("/Recipe", (req, res) => {
-    console.log("Request body:", req.body);
-    console.log(req.body.userID)
+  console.log("Request body:", req.body);
+  console.log(req.body.userID)
   const q = "INSERT INTO Recipe (`recipe_id`, `name`, `created_by_user`, `cuisine`, `time_minutes`) VALUES (?)"
   const values = [
     req.body.recipe_id,
