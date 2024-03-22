@@ -57,19 +57,7 @@ app.get("/GroceryStore", (req, res) => {
   });
 });
 
-// app.get("/SpecificStore/:storeid", (req, res) => {
-//   console.log("Specific store id:", req.params.storeid);
-//   const q = `SELECT * FROM Products WHERE store_id = ${req.params.storeid}`;
-//   db.query(q, (err, data) => {
-//     if (err) return res.json(err);
-//     console.log("Data:", data);
-//     return res.json(data);
-//   });
-// });
-
 app.get("/SpecificStore/:storeid", (req, res) => {
-  // console.log("Specific store id:", req.params.storeid);
-
   const storeQuery = `SELECT name, street_address, city, state, zip_code FROM GroceryStore WHERE store_id = ${req.params.storeid}`;
   const productQuery = `SELECT * FROM Products WHERE store_id = ${req.params.storeid}`;
 
@@ -86,7 +74,7 @@ app.get("/SpecificStore/:storeid", (req, res) => {
       }
 
       const responseData = {
-        storeInfo: storeData[0], // Assuming only one store info is returned
+        storeInfo: storeData[0],
         products: productData,
       };
 
@@ -95,7 +83,6 @@ app.get("/SpecificStore/:storeid", (req, res) => {
     });
   });
 });
-
 
 app.get("/Products", (req, res) => {
   const q = "SELECT * FROM Products";
