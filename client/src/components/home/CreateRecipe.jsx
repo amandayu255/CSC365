@@ -1,34 +1,48 @@
 import React, { useState } from "react";
-import axios from "axios"; // Add this import
+import axios from "axios";
 import "./CreateRecipe.css";
 
 const CreateRecipe = () => {
   const [name, setName] = useState("");
-  const [userID, setUserID] = useState("1");
   const [cuisine, setCuisine] = useState("");
-  const [cookTime, setCookTime] = useState("");
+  const [timeMinutes, setTimeMinutes] = useState("");
   const [ingredientList, setIngredientList] = useState([]);
-  const [ingredientGramsList, setIngredientGramsList] = useState([]);
   const [instructionList, setInstructionList] = useState([]);
+
+  const handleSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      const res = await axios.post("http://localhost:8800/Recipe", {
+        name,
+        cuisine,
+        time_minutes: timeMinutes,
+        created_by_user: 1, // Set created_by_user to 1
+        ingredientList,
+        instructionList,
+      });
+      console.log("Response from backend:", res.data);
+      console.log("Recipe created successfully:", res.data);
+      setName("");
+      setCuisine("");
+      setTimeMinutes("");
+      setIngredientList([]);
+      setInstructionList([]);
+    } catch (error) {
+      console.error("Error creating recipe:", error);
+    }
+  };
 
   const handleAddIngredient = () => {
     setIngredientList([
       ...ingredientList,
       { name: "", quantity: "", unit: "", grams: "" },
     ]);
-    setIngredientGramsList([...ingredientGramsList, ""]);
   };
 
   const handleIngredientChange = (index, value) => {
     const newList = [...ingredientList];
     newList[index] = value;
     setIngredientList(newList);
-  };
-
-  const handleIngredientGramsChange = (index, value) => {
-    const newList = [...ingredientGramsList];
-    newList[index] = value;
-    setIngredientGramsList(newList);
   };
 
   const handleAddInstruction = () => {
@@ -39,33 +53,6 @@ const CreateRecipe = () => {
     const newList = [...instructionList];
     newList[index] = value;
     setInstructionList(newList);
-  };
-
-  const handleSubmit = async (event) => {
-    event.preventDefault();
-    console.log("Submitting form data:", { name, cuisine, cookTime, ingredientList, ingredientGramsList, instructionList });
-    try {
-      const res = await axios.post("http://localhost:8800/Recipe", {
-        name,
-        cuisine,
-        cookTime,
-        userID, 
-        ingredientList,
-        ingredientGramsList,
-        instructionList,
-      });
-      console.log("Response from backend:", res.data);
-      console.log("Recipe created successfully:", res.data);
-      setName("");
-      setUserID(1); // Reset userID to 1
-      setCuisine("");
-      setCookTime("");
-      setIngredientList([]);
-      setIngredientGramsList([]);
-      setInstructionList([]);
-    } catch (error) {
-      console.error("Error creating recipe:", error);
-    }
   };
 
   return (
@@ -83,6 +70,7 @@ const CreateRecipe = () => {
               onChange={(e) => setName(e.target.value)}
             />
           </label>
+
           <label>
             Cuisine:
             <input
@@ -95,8 +83,8 @@ const CreateRecipe = () => {
             Cook Time (in mins):
             <input
               type="text"
-              value={cookTime}
-              onChange={(e) => setCookTime(e.target.value)}
+              value={timeMinutes}
+              onChange={(e) => setTimeMinutes(e.target.value)}
             />
           </label>
 

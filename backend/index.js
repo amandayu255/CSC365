@@ -106,9 +106,9 @@ app.post("/Recipe", (req, res) => {
   const values = [
     req.body.recipe_id,
     req.body.name,
-    req.body.userID,
+    req.body.created_by_user,
     req.body.cuisine,
-    req.body.cookTime,
+    req.body.time_minutes,
   ];
 
   db.query(q, [values], (err, data) => {
