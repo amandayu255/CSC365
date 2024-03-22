@@ -43,7 +43,7 @@ const SpecificStore = () => {
         <h1>{storeInfo.name}</h1>
         <p>
           <strong>Address: </strong>
-          {storeInfo.street_address}, {storeInfo.city}, {storeInfo.state},{" "}
+          {storeInfo.street_address}, {storeInfo.city} {storeInfo.state},{" "}
           {storeInfo.zip_code}
         </p>
       </header>
